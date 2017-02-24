@@ -1,0 +1,18 @@
+<!-- User Login Form -->
+
+<h2>Log In</h2>
+<form id="login" method="post" action="/login">
+  <% if @error %>
+      <div class="alert">* <%= @error %>.</div>
+  <% end %>
+  <p><label for="email">Email:</label><br>
+    <input type="text" name="user[email]" value="<%= @user.try(:email) %>">
+  </p>
+
+  <p><label for="password">Password:</label><br>
+  <input type="password" name="user[password]" value="<%= @article.try(:password) %>"></p>
+
+  <!-- BUTTON -->
+   <input type="submit" value="Login" class="button">
+</form>
+<p>Not a user? <a href="/users/new">Sign Up</a></p>
