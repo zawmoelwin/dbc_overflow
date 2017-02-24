@@ -26,3 +26,5 @@ group :test, :development do
   gem 'faker'
   gem 'pry-byebug'
 end
+
+gem 'bcrypt'
