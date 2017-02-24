@@ -36,3 +36,11 @@ put "/questions/:question_id/answers/:answer_id" do
   @answer.save
    redirect "/questions/#{params[:question_id]}"
 end
+
+delete "/questions/:question_id/answers/:answer_id" do
+
+  @answer = Question.find(params[:question_id]).answers.find(params[:answer_id])
+  @answer.answer = params[:answer]
+  @answer.destroy
+   redirect "/questions/#{params[:question_id]}"
+end
