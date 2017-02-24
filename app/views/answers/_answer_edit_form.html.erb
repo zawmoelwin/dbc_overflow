@@ -1,0 +1,8 @@
+  <form method="post" id="answerform" action= "/questions/<%=@edit_question_id%>/answers/<%=@edit_answer_id%>" >
+    <input type = "hidden" name="_method" value = "put"/>
+    <input type = "textarea" id="answer_box" name = "answer"/>
+    <br>
+    <input type = "submit" id="answer_button" value = "Post Your Answer"/>
+  </form>
+
+
