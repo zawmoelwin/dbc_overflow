@@ -1,0 +1,35 @@
+
+<div>
+  <h1>
+    <%= @question.question%>
+    <%= find_user(@question.user_id).user_name%>
+    <br>
+    ___________________________________________________________________________
+    <br>
+    <% @answers.sort_by(&:created_at).each do |answer|%>
+    <%= answer.answer%>
+
+    <%= find_user(answer.answerer_id).user_name%>
+          <% if current_user%>
+
+          <a href="/questions/<%=@question.id%>/answers/<%=answer.id%>"> Edit </a>
+           <form method="post" class="delete" action= "/questions/<%=@question.id%>/answers/<%=answer.id%>" >
+    <input type = "hidden" name="_method" value = "delete"/>
+    <input type = "submit" id="delete_button" value = "Delete"/>
+  </form>
+
+          <%end%>
+    <br>
+    ___________________________________________________________________________
+    <br>
+    <%end%>
+  </h1>
+
+  <form method="post" id="answerform" action="/questions/<%=@question.id%>">
+    <input type = "textarea" id="answer_box" name = "answer">
+    <br>
+    <input type = "submit" id="answer_button" value = "Post Your Answer">
+
+  </form>
+
+</div>
