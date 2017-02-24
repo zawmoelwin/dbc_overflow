@@ -1,23 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!--
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
-  <link rel="stylesheet" href="/css/normalize.css">
-  <!--
-    application.css is where you put your styles
-  -->
-  <link rel="stylesheet" href="/css/application.css">
+  <link rel="stylesheet" href="/css/normalize.css?app=skills">
+  <link rel="stylesheet" href="/css/application.css?app=skills">
 
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="/js/application.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/js/application.js?app=skills"></script>
 
   <title></title>
 </head>
 <body>
-  <%= yield %>
+  <div class="container">
+    <nav>
+      <div class="brand"><h1>DBC Overflow</h1></div>
+      <ul>
+        <li><a href="/">Questions</a></li>
+        <% if current_user %>
+          <li id="welcome-message">Welcome, <%= current_user.first_name %></li>
+          <li><a href="/users/<%= current_user.id %>">Profile</a></li>
+          <li class="logout-link"><a href="/logout">Logout</a></li>
+        <% else %>
+          <li><a href="/users/new">Sign Up</a></li>
+          <li><a href="/login">Login</a></li>
+        <% end %>
+      </ul>
+    </nav>
+    <main class="content">
+      <%= yield %>
+    </main>
+  </div>
 </body>
 </html>
