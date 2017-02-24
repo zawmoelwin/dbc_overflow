@@ -6,13 +6,13 @@
       <div class="alert">* <%= @error %>.</div>
   <% end %>
   <p><label for="email">Email:</label><br>
-    <input type="text" name="user[email]" value="<%= @user.try(:email) %>">
+    <input class="form-control" type="text" name="user[email]" value="<%= @user.try(:email) %>">
   </p>
 
   <p><label for="password">Password:</label><br>
-  <input type="password" name="user[password]" value="<%= @article.try(:password) %>"></p>
+  <input class="form-control" type="password" name="user[password]" value="<%= @article.try(:password) %>"></p>
 
   <!-- BUTTON -->
-   <input type="submit" value="Login" class="button">
+   <input class="btn btn-primary" type="submit" value="Login" class="button">
 </form>
 <p>Not a user? <a href="/users/new">Sign Up</a></p>

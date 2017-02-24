@@ -13,12 +13,17 @@ post '/login' do
     redirect "users/#{@user.id}"
   else
     @error = "Incorrect email or password"
-    redirect "/login?error=#{@error}"
+    erb:'sessions/new.html'
   end
 end
 
 # Request to logout, redirect to home page
 delete '/logout' do
+  logout
+  redirect '/'
+end
+
+get '/logout' do
   logout
   redirect '/'
 end
