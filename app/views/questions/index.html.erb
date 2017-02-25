@@ -1,8 +1,11 @@
+
 <div class="row">
   <div class="col-md-8">
     <ul class="list-group">
-    <% @questions.each do |question| %>
+      <% sort_by_vote(@questions).each do |value_array| %>
+      <%@question = Question.find(value_array[0])%>
       <li class="list-group-item"><a href="/questions/<%= question.id %>"><%= question.question %></a></li>
+       <p> points: <%=vote_total(@question.votes)%></p>
     <% end %>
     </ul>
   </div>
@@ -40,3 +43,4 @@
     </div><!-- /.modal-dialog -->
 </div>
   </div><!-- /.modal -->
+
