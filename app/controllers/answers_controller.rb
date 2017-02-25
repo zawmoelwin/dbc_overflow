@@ -39,3 +39,13 @@ post "/questions/:id/answers" do
   redirect "/questions/#{@question.id}"
 
 end
+
+post "/answers/:id/vote" do
+  if params[:submit_param] == "upvote"
+
+  elsif params[:submit_param] == "downvote"
+
+  end
+
+end
+
