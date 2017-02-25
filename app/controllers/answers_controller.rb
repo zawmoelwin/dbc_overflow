@@ -40,11 +40,20 @@ post "/questions/:id/answers" do
 
 end
 
+
 post "/answers/:id/vote" do
+
+  @answer =     Answer.find(params[:id])
+  @question_id = @answer.question_id
   if params[:submit_param] == "upvote"
 
-  elsif params[:submit_param] == "downvote"
+    vote_add(@answer.votes , 1)
 
+    redirect "/questions/#{@question_id}"
+
+  elsif params[:submit_param] == "downvote"
+    vote_add(@answer.votes , -1)
+    redirect "/questions/#{@question_id}"
   end
 
 end

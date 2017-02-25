@@ -3,24 +3,37 @@
   <div>
     <h2><%= @question.question%></h2>
     <p>Asked by: <%= find_user(@question.user_id).user_name%></p>
+    <p>
+     points: <%= vote_total(@question.votes) %>
+    </p>
+      <form method= "post" action="/questions/<%=@question.id %>/vote">
+      <input type="submit" name="submit_param" value="upvote" class="button"/>
+      <input type="submit" name="submit_param" value="downvote" class="button"/>
+    </form>
     <br>
     <hr>
     <br>
-    <% @answers.sort_by(&:created_at).each do |answer|%>
-      <p><%= answer.answer%></p>
-      <p>By <%= find_user(answer.answerer_id).user_name%></p>
+    @answer = ""
+    <% sort_by_vote(@answers).each do |value_array|%>
+    <%@answer = Answer.find(value_array[0])%>
+      <p><%= @answer.answer%></p>
+      <p>By <%= find_user(@answer.answerer_id).user_name%></p>
+      <br>
+      <p> points: <%= vote_total(@answer.votes) %>
+      </p>
+      <br>
        <% if current_user%>
-        <% if current_user.id == answer.answerer_id%>
+        <% if current_user.id == @answer.answerer_id%>
 
 
-        <a href="/questions/<%=@question.id%>/answers/<%=answer.id%>">Edit</a>
+        <a href="/questions/<%=@question.id%>/answers/<%=@answer.id%>">Edit</a>
         <br>
-         <form method= "post" action="answers/<%=answer.id %>/vote">
+         <form method= "post" action="/answers/<%=@answer.id %>/vote">
           <input type="submit" name="submit_param" value="upvote" class="button"/>
           <input type="submit" name="submit_param" value="downvote" class="button"/>
         </form>
         <br>
-         <form method="post" class="delete" action= "/questions/<%=@question.id%>/answers/<%=answer.id%>" >
+         <form method="post" class="delete" action= "/questions/<%=@question.id%>/answers/<%=@answer.id%>" >
           <input type = "hidden" name="_method" value = "delete"/>
           <input class="btn btn-primary" type = "submit" id="delete_button" value = "Delete"/>
         </form>
