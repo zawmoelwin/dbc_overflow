@@ -3,6 +3,42 @@
   <div>
     <h2><%= @question.question%></h2>
     <p>Asked by: <%= find_user(@question.user_id).user_name%></p>
+
+
+    
+    <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#add-comment">Add A Comment</button>
+  <br>
+  </div>
+  <!--- MODAL Comments -->
+  <div id="add-comment" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Submit a Comment</h4>
+        </div>
+        <div class="modal-body">
+          <form method="post" id="commentform" action="/questions/<%= @question.id %>/comments">
+      <!-- <input type = "textarea" name ="question"> -->
+            <textarea class="form-control" rows="3" name="comment[comment]"></textarea>
+            <br>
+            <input class="btn btn-primary" type = "submit" id="comment_button" value = "Submit">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+  </div><!-- /.modal -->
+
+    <% @comments.each do |comment| %>
+      <ul>
+    <li><%= comment.comment%></li>
+      </ul>
+    <%end%>
+
     <p>
      points: <%= vote_total(@question.votes) %>
     </p>
@@ -10,6 +46,7 @@
       <input type="submit" name="submit_param" value="upvote" class="button"/>
       <input type="submit" name="submit_param" value="downvote" class="button"/>
     </form>
+
     <br>
     <hr>
     <br>
