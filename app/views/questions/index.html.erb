@@ -1,5 +1,7 @@
 <ul>
-<% @questions.each do |question| %>
-  <li><a href="/questions/<%= question.id %>"><%= question.question %></a></li>
+<% sort_by_vote(@questions).each do |value_array| %>
+<%@question = Question.find(value_array[0])%>
+<li><a href="/questions/<%= @question.id %>"><%= @question.question %></a></li>
+  <p> points: <%=vote_total(@question.votes)%></p>
 <% end %>
 </ul>
