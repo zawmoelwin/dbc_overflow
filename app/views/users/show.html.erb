@@ -1,8 +1,13 @@
 <!-- User Profile Page -->
 <h2>Hi <%= @user.user_name%>!</h2>
 
-<h2>Profile</h2>
-
+<h2>Your Profile</h2>
+<h3>Your Questions</h3>
+<ul class="list-group">
+  <% @user.questions.each do |question| %>
+    <li class="list-group-item"> <a href="/questions/<%= question.id %>"><%= question.question %></a></li>
+  <% end %>
+</ul>
 <form id="logout" method="post" action="/logout">
   <input type="hidden" name="_method" value="delete">
   <input class="btn btn-primary" type="submit" value="Logout" class="button">

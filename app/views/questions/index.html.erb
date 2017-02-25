@@ -1,5 +1,42 @@
-<ul>
-<% @questions.each do |question| %>
-  <li><a href="/questions/<%= question.id %>"><%= question.question %></a></li>
-<% end %>
-</ul>
+<div class="row">
+  <div class="col-md-8">
+    <ul class="list-group">
+    <% @questions.each do |question| %>
+      <li class="list-group-item"><a href="/questions/<%= question.id %>"><%= question.question %></a></li>
+    <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <% if @errors %>
+      <div class="alert alert-danger" role="alert">
+        <ul>
+          <li><%= @errors %></li>
+        </ul>
+      </div>
+    <% end %>
+    <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#ask-question">Ask A Question</button>
+  <br>
+  </div>
+  <!--- MODAL -->
+  <div id="ask-question" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title">Submit a Question</h4>
+        </div>
+        <div class="modal-body">
+          <form method="post" id="questionform" action="/questions">
+                <!-- <input type = "textarea" name ="question"> -->
+                <textarea class="form-control" rows="3" name="question"></textarea>
+                <br>
+                <input class="btn btn-primary" type = "submit" id="question_button" value = "Submit">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>
+  </div><!-- /.modal -->
