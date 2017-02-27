@@ -17,7 +17,9 @@
         </ul>
       </div>
     <% end %>
+    <%if current_user%>
     <button class="btn btn-primary btn-lg" type="button" data-toggle="modal" data-target="#ask-question">Ask A Question</button>
+    <%end%>
   <br>
   </div>
   <!--- MODAL -->
