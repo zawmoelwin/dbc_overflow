@@ -4,12 +4,7 @@
 #   erb :'answers/answers.html'
 # end
 
-get "/questions/:question_id/answers/:id" do
 
-  @edit_question_id = params[:question_id]
-  @edit_answer_id = params[:id]
-  erb :'/answers/_answer_edit_form.html'
-end
 
 put "/questions/:question_id/answers/:id" do
   # answer_id = params[:answer_id]
@@ -58,3 +53,23 @@ post "/answers/:id/vote" do
 
 end
 
+post "/questions/:question_id/answers/:id/comments" do
+  @answer = Answer.find(params[:id])
+  @question = Question.find(params[:question_id])
+  @comment = Comment.new(comment: params[:comment][:comment],commentor_id: current_user.id)
+  # binding.pry
+  @answer.comments << @comment
+  if @comment.save
+    redirect "/questions/#{@question.id}"#/answers/#{@answer.id}"
+  else
+    redirect "/questions/#{@question.id}"
+  end
+
+end
+
+get "/questions/:question_id/answers/:id" do
+
+  @edit_question_id = params[:question_id]
+  @edit_answer_id = params[:id]
+  erb :'/answers/_answer_edit_form.html'
+end
