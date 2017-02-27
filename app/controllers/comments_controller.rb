@@ -1,4 +1,4 @@
-get '/questions/:id/comments' do 
+get '/questions/:id/comments' do
 
   @question = Question.find(params[:id])
   @answers = @question.answers
@@ -6,16 +6,15 @@ get '/questions/:id/comments' do
   p '*' * 100
   @comments = @question.comments
   erb :'answers/answers.html'
-end 
+end
 
-post '/questions/:id/comments' do 
+post '/questions/:id/comments' do
   @question = Question.find(params[:id])
-  @comment = Comment.new(params[:comment])
+  @comment = Comment.new(comment: params[:comment][:comment],commentor_id: current_user.id )
   @question.comments << @comment
   if @comment.save
     redirect "/questions/#{@question.id}/comments"
   else
     redirect "/questions/#{@question.id}"
-  end 
-end 
-
+  end
+end
