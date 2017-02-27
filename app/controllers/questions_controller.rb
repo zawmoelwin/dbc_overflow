@@ -1,3 +1,8 @@
+get "/questions" do
+  @questions = Question.all
+  erb :'questions/index.html'
+end
+
 
 
 post '/questions' do 
@@ -10,6 +15,16 @@ post '/questions' do
     erb :'questions/index.html'
   end
 end 
+
+
+
+get "/questions/:id" do
+  @question = Question.find(params[:id])
+  @answers = @question.answers
+  @comments = @question.comments
+
+  erb :'answers/answers.html'
+end
 
 
 post "/questions/:id/vote" do

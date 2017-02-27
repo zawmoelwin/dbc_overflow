@@ -4,7 +4,7 @@
     <ul class="list-group">
       <% sort_by_vote(@questions).each do |value_array| %>
       <%@question = Question.find(value_array[0])%>
-      <li class="list-group-item"><a href="/questions/<%= question.id %>"><%= question.question %></a></li>
+      <li class="list-group-item"><a href="/questions/<%= @question.id %>"><%= @question.question %></a></li>
        <p> points: <%=vote_total(@question.votes)%></p>
     <% end %>
     </ul>
