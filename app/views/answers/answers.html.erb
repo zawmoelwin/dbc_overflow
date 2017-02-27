@@ -3,8 +3,9 @@
         <h2><%= @question.question%></h2>
         <p>Asked by:
             <%= find_user(@question.user_id).user_name%></p>
-
+        <% if current_user%>
         <button class="btn btn-primary btn-md" type="button" data-toggle="modal" data-target="#add-comment">Add A Comment</button>
+        <% end%>
         <br>
     </div>
     <!--- MODAL Comments -->
@@ -59,7 +60,7 @@
 <hr>
 <br>
 <h2>Answer</h2>
-
+<div>
 <% sort_by_vote(@answers).each do |value_array|%>
 <%@answer = Answer.find(value_array[0])%>
 <p><%= @answer.answer%></p>
@@ -90,23 +91,25 @@
 <%end%>
 <%end%>
 
-<div class="answer-comments">
-<ul>
+<div>
+
 <% @answer.comments.each do |comment|%>
-<li>
+
 <%= comment.comment %>
 <br>
   <p>"comment by"</p>
-  <br
+  <br>
 <a href="#"> <%=find_user(comment.commentor_id).user_name%> </a>
-</li>
+<br>
 <% end %>
-</ul>
+<br>
 </div>
 
 <!-- copy and past and edit comment for answer -->
+<% if current_user%>
 
 <button class="btn btn-primary btn-md" type="button" data-toggle="modal" data-target="#add-comment-answer">Add A Comment</button>
+<%end%>
 <br>
 </div>
 <!--- MODAL Comments -->
@@ -146,7 +149,7 @@
 <hr>
 <br>
 <%end%>
-
+</div>
 <!-- answer comments ends here -->
 </div>
 <% if current_user %>
